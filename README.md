@@ -2,6 +2,14 @@
 
 A dark skin for Hermes Agent with charcoal surfaces, warm amber controls, and ochre message bubbles. In Hermes Desktop and Webapp it also refines the chat layout, centers the composer in a new chat, and marks running sessions with an amber badge.
 
+## Screenshots
+
+Captured in Hermes Webapp using fictional demo sessions.
+
+![Graphite Amber conversation with an ochre message bubble and charcoal sidebar](screenshots/conversation.png)
+
+![Graphite Amber new chat with a centered composer and amber controls](screenshots/new-chat.png)
+
 ## Install
 
 From this repository, run the following on the machine that runs Hermes (the gateway host if you use Webapp or connect Desktop to a remote gateway). For a named profile, use that profile's Hermes home and run the command in the same profile context.
