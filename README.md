@@ -12,6 +12,25 @@ Captured in Hermes Webapp using fictional demo sessions.
 
 ## Install
 
+### Ask Hermes to set it up
+
+Paste this into a Hermes chat to install and activate Graphite Amber:
+
+```text
+Install and activate the Graphite Amber theme for my current Hermes profile.
+Download the YAML from:
+https://github.com/HamadTheIronside/hermes-graphite-amber/releases/download/v0.1.0/graphite-amber.yaml
+
+Save it as graphite-amber.yaml in that profile's skins directory. If I'm using
+Webapp or a remote gateway, use the Hermes home on the gateway host. Don't
+overwrite a different file with the same name without asking me first. Run
+hermes skin use graphite-amber in the same profile and verify it's active.
+If Desktop or Webapp doesn't switch automatically, tell me how to select it
+in Appearance. Leave my other settings alone and tell me how to switch back.
+```
+
+### Install manually
+
 From this repository, run the following on the machine that runs Hermes (the gateway host if you use Webapp or connect Desktop to a remote gateway). For a named profile, use that profile's Hermes home and run the command in the same profile context.
 
 ```sh
