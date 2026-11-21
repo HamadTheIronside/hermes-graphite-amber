@@ -18,7 +18,7 @@ In Desktop, you can also select `graphite-amber` in **Settings → Appearance**.
 ## Compatibility
 
 - The palette is a Hermes skin; the layout overrides target the dark Desktop and Webapp interface, not the separate admin dashboard.
-- No Hermes core changes or plugins are required. The separate Graphite Rail shortcut bar is not included.
+- No Hermes core changes are required.
 - The CSS targets Hermes renderer markup. If an update changes that markup, some layout refinements may need updating.
 
 ## License
