@@ -1,0 +1,288 @@
+name: graphite-amber
+description: Charcoal surfaces, warm amber controls, and ochre message bubbles.
+colors:
+  background: "#181818"
+  banner_border: "#444444"
+  banner_title: "#f5f5f5"
+  banner_accent: "#f6c543"
+  banner_dim: "#9e9e9e"
+  banner_text: "#f5f5f5"
+  ui_primary: "#f5f5f5"
+  ui_accent: "#f6c543"
+  ui_text: "#f5f5f5"
+  ui_label: "#c4c4c4"
+  ui_border: "#343434"
+  ui_tool: "#d9a337"
+  ui_thinking: "#9e9e9e"
+  ui_ok: "#4cce87"
+  ui_warn: "#ff894f"
+  ui_error: "#fa7373"
+  prompt: "#f5f5f5"
+  input_rule: "#444444"
+  response_border: "#343434"
+  session_label: "#dedede"
+  session_border: "#9e9e9e"
+  status_bar_bg: "#141414"
+  status_bar_text: "#dedede"
+  status_bar_good: "#4cce87"
+  status_bar_warn: "#f6c543"
+  status_bar_bad: "#ff894f"
+  status_bar_critical: "#fa7373"
+  voice_status_bg: "#232323"
+  selection_bg: "#624625"
+  completion_menu_bg: "#2d2d2d"
+  completion_menu_current_bg: "#624625"
+  completion_menu_meta_bg: "#2d2d2d"
+  completion_menu_meta_current_bg: "#624625"
+  syntax_string: "#a6cb91"
+  syntax_number: "#eeb180"
+  syntax_keyword: "#f6c543"
+  syntax_comment: "#9e9e9e"
+
+# Renderer-only overrides for the palette and chat layout.
+customCSS: |
+  :root.dark:has(#hermes-desktop-custom-css) {
+    --ga-canvas: #181818;
+    --ga-sidebar: #171717;
+    --ga-card: #232323;
+    --ga-flyout: #2d2d2d;
+    --ga-selection: #292929;
+    --ga-composer: #363636;
+    --ga-bubble: #95611f;
+    --ga-action: #d9a337;
+    --ga-toggle: #f6c543;
+    --ga-divider: #343434;
+    --ui-bg-chrome: var(--ga-canvas);
+    --ui-bg-sidebar: var(--ga-sidebar);
+    --ui-bg-editor: var(--ga-card);
+    --ui-bg-elevated: var(--ga-flyout);
+    --ui-bg-card: var(--ga-card);
+    --ui-bg-tertiary: var(--ga-selection);
+    --ui-chat-bubble-background: var(--ga-bubble);
+    --ui-row-active-background: var(--ga-selection);
+    --ui-row-hover-background: #222222;
+    --ui-control-hover-background: var(--ga-selection);
+    --ui-stroke-secondary: var(--ga-divider);
+    --ui-stroke-tertiary: #292929;
+    --ui-text-primary: #f5f5f5;
+    --ui-text-secondary: #d1d1d1;
+    --ui-text-tertiary: #a8a8a8;
+    --noise-opacity-mul: 0 !important;
+    --radius-scalar: 1 !important;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-slot='composer-root']:not([data-hud-shell] *) {
+    --composer-fill: var(--ga-composer);
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-slot='composer-root'][data-thread-scrolled-up]:not([data-hud-shell] *) {
+    --composer-fill: color-mix(in srgb, var(--ga-composer) 90%, transparent);
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-slot='composer-dock']:is(:hover, :focus-within) [data-slot='composer-root']:not([data-hud-shell] *) {
+    --composer-fill: var(--ga-composer);
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-slot='composer-surface']:not([data-hud-shell] *) {
+    border-radius: 22px;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-slot='composer-surface'] button.bg-foreground:enabled {
+    background-color: var(--ga-action);
+    color: #141414;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-slot='composer-surface'] button.bg-foreground:enabled:hover {
+    background-color: #efb747;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) .composer-human-message {
+    border-radius: 12px;
+    border-color: transparent;
+    color: #ffffff;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) .composer-human-message:hover {
+    border-color: #b7813c;
+  }
+  /* Center the dock and reading column on the same axis. Leave the HUD alone. */
+  :root.dark:has(#hermes-desktop-custom-css) [data-chat-surface]:not([data-hud-shell], [data-hud-shell] *) {
+    --composer-width: 55rem;
+    --conversation-turn-gap: 1rem;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-chat-surface] [data-slot='aui_thread-content']:not([data-hud-shell] *) {
+    max-width: calc(var(--composer-width) + 3rem);
+  }
+  /* Size the whole message/action group together so the controls stay attached
+     to the right-aligned bubble. Keep the inline edit composer full width. */
+  :root.dark:has(#hermes-desktop-custom-css) [data-chat-surface] [data-slot='aui_user-bubble-actions']:not([data-hud-shell] *) {
+    width: fit-content;
+    min-width: min(8rem, 100%);
+    max-width: min(100%, max(18rem, 72%));
+    margin-inline-start: auto;
+  }
+  /* Style native session groups without changing their sort or virtual heights. */
+  :root.dark:has(#hermes-desktop-custom-css) [data-sessions-mode] > :is([data-session-pin-drop], [data-session-unpin-drop]) {
+    padding-inline: 4px;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-sessions-mode] > [data-session-unpin-drop] {
+    margin-block-start: 8px;
+    padding-block-start: 5px;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-sessions-mode] [class~='group/section'] .dither {
+    display: none;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-sessions-mode] [class~='group/section'] :is(button, div) > span:has(> .dither) {
+    color: var(--ui-text-tertiary);
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-sessions-mode] [data-session-pin-drop] .row-hover:not([class*='min-h-[2.75rem]'], [class*='min-h-[3.875rem]'], [class*='min-h-[4']) {
+    min-height: 24px;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-sessions-mode] .row-hover {
+    border-radius: 7px;
+    --ui-row-active-background: var(--ga-selection);
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-sessions-mode] [data-sessions-project='__no_project__'] {
+    margin-block: 6px;
+  }
+  /* The SDK keeps its Capabilities row as an escape hatch. Hide the duplicate
+     only while the same action is mounted in the separate Graphite Rail. */
+  :root.dark:has(#hermes-desktop-custom-css):has(.graphite-rail button[aria-label='Capabilities']) [data-tour='sessions-sidebar'] [data-sidebar='menu-item']:has([data-tour='sidebar-nav-capabilities']) {
+    display: none;
+  }
+  :root.dark:has(#hermes-desktop-custom-css):has(.graphite-rail button[aria-label='Capabilities']) [data-tour='sessions-sidebar'] [data-sidebar='content'] > [data-sidebar='group']:first-child::before {
+    content: 'Hermes';
+    display: block;
+    padding: 0.15rem 0.55rem 0.1rem;
+    color: var(--ui-text-primary);
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+  /* Session sidebar only: keep status semantics and row heights native. */
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sidebar='content'] > div:not([data-sessions-mode]) > div:has(> input[type='text'][placeholder]) {
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 0.55rem;
+    border: 1px solid #333333;
+    border-radius: 999px;
+    background-color: #252525;
+    opacity: 1;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sidebar='content'] > div:not([data-sessions-mode]) > div:has(> input[type='text'][placeholder]):focus-within {
+    border-color: #ad8648;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sidebar='content'] > div:not([data-sessions-mode]) > div:has(> input[type='text'][placeholder]) > svg,
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sidebar='content'] > div:not([data-sessions-mode]) > div > input[type='text'][placeholder]::placeholder {
+    color: var(--ui-text-tertiary);
+    opacity: 1;
+  }
+  /* Hide only the native empty state, not a manually collapsed group. */
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-session-pin-drop]:has(> [data-sidebar='group-content'] > div > span > .codicon-pin) {
+    display: none;
+  }
+  /* Keep the native running marker as a selector, but replace its animation
+     with a readable badge. Pending input and background tasks keep their own dots. */
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] .row-hover > .arc-row {
+    display: none;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover {
+    --ui-row-active-background: #282828;
+    --ui-row-open-background: transparent;
+    --ui-row-hover-background: #222222;
+    border-radius: 9px;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] [class~='gap-px']:has(> .row-hover, > div > .row-hover) {
+    row-gap: 4px;
+  }
+  /* Virtualized rows measure their wrapper. Put the gap inside that box. */
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] [data-index]:has(> .row-hover) {
+    padding-block-end: 4px;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover .hover-marquee {
+    color: #d6d6d6;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover[class*='bg-(--ui-row-active-background)'] .hover-marquee {
+    color: var(--ui-text-primary);
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover:has(> .arc-row):has([role='status'][class*='(--ui-accent)']) {
+    background-color: #312819;
+    box-shadow: inset 3px 0 var(--ga-action);
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover[class*='bg-(--ui-row-active-background)']:has(> .arc-row):has([role='status'][class*='(--ui-accent)']) {
+    background-color: #3d301d;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover:has(> .arc-row):has([role='status'][class*='(--ui-accent)']) [data-row-actions]:has(> [data-session-actions])::before {
+    content: 'Running';
+    flex: none;
+    border-radius: 5px;
+    padding: 2px 5px;
+    background-color: #59411f;
+    color: #ffda8a;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover:has(> .arc-row):has([role='status'][class*='(--ui-accent)']) [data-row-actions] > [data-session-actions] {
+    position: static;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover [role='status'][class*='bg-(--ui-success)'] {
+    background-color: #8c9590;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover:not(:hover, :focus-within) [data-row-actions] time {
+    opacity: 0;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-mode] .row-hover [data-row-actions] time {
+    color: #969696;
+    font-variant-numeric: tabular-nums;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-project] [class~='group/workspace'] [class*='leading-'][class~='truncate'] {
+    font-weight: 500;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-project] button[class~='group/more'] .codicon-ellipsis {
+    visibility: hidden;
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-tour='sessions-sidebar'] [data-sessions-project] button[class~='group/more']:not(:hover, :focus-visible) > span:last-child {
+    color: #969696;
+  }
+  /* Keep the native panes and their data; give the right-hand tools a slightly
+     raised graphite surface so they read as separate from the conversation. */
+  :root.dark:has(#hermes-desktop-custom-css) :is([data-pane-host='review'], [data-pane-host='files']) {
+    --ui-sidebar-surface-background: var(--ga-card);
+    --ui-editor-surface-background: var(--ga-card);
+    --ui-chat-surface-background: var(--ga-card);
+    --ui-bg-sidebar: var(--ga-card);
+    background-color: var(--ga-card);
+  }
+  /* Only the real draft splash triggers centering. A loaded, routed, or
+     onboarding chat never moves its composer. Short panes keep it docked. */
+  :root.dark:has(#hermes-desktop-custom-css) [data-session-anchor='workspace']:not([data-setup-chat], [data-hud-shell] *):has([data-slot='aui_intro']) {
+    container: ga-draft / size;
+  }
+  @container ga-draft (min-height: 380px) {
+    :root.dark:has(#hermes-desktop-custom-css) [data-slot='composer-dock']:not([data-popped-out]) {
+      inset-block-end: 50%;
+      transform: translateY(50%);
+    }
+    :root.dark:has(#hermes-desktop-custom-css) [data-slot='composer-dock']:not([data-popped-out]) [data-slot='composer-fade'] {
+      min-height: 5rem;
+      padding: 0.65rem 0.8rem;
+    }
+    :root.dark:has(#hermes-desktop-custom-css) [data-slot='aui_intro'] {
+      position: absolute;
+      inset: auto 0 calc(50% + var(--composer-measured-height) / 2 + 0.65rem);
+      padding: 0;
+      color: var(--ui-text-primary);
+    }
+    :root.dark:has(#hermes-desktop-custom-css) [data-slot='aui_intro']::before {
+      content: 'What should we work on?';
+      font-size: clamp(1.25rem, 4cqi, 1.875rem);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+    :root.dark:has(#hermes-desktop-custom-css) [data-slot='aui_intro'] > div {
+      display: none;
+    }
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-slot='switch'][data-state='checked']:enabled {
+    background-color: var(--ga-toggle);
+  }
+  :root.dark:has(#hermes-desktop-custom-css) [data-slot='switch'][data-state='checked'] [data-slot='switch-thumb'] {
+    background-color: #fff;
+    box-shadow: 0 0 0 1px #78551366;
+  }
